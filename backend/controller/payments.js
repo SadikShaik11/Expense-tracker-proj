@@ -1,7 +1,7 @@
 const payment = require('../models/premium')
 const Sequelize = require('sequelize');
 const sequelize = require('../util/database');
-module.exports.payment_verification =  (req, res) => {
+const payment_verification =  (req, res) => {
 
     let body = req.body.response.razorpay_order_id + "|" + req.body.response.razorpay_payment_id;
 
@@ -17,7 +17,7 @@ module.exports.payment_verification =  (req, res) => {
     res.send(response);
 }
 
-module.exports.CreateOrder =  (req, res, next) => {
+const CreateOrder =  (req, res, next) => {
     console.log("create order", req.body);
     var options = {
         amount: req.body.amount,
@@ -29,7 +29,7 @@ module.exports.CreateOrder =  (req, res, next) => {
         res.send({ order: order.id })
     });
 }
-module.exports.Save = (req,res,next)=>{
+const Save = (req,res,next)=>{
         const paymentId= req.body.razorpay_payment_id
          const OrderId=req.body.razorpay_order_id
           const Signature= req.body.razorpay_signature  
@@ -39,4 +39,20 @@ module.exports.Save = (req,res,next)=>{
             orderid:OrderId,
             signature:Signature,
             description:description})
+}
+
+const IsPremiumMember=(req,res,next)=>{
+          const {email}=req.body;
+          payment.findALL({emaii:email}).then((result)=>{
+              console.log(result);
+              res.status(200).send(<h1>success</h1>)
+          }).catch(()=>{
+              res.status(400).send(<h1>not premium user</h1>)
+          })
+}
+module.exports={
+    payment_verification,
+    CreateOrder,
+    IsPremiumMember,
+    Save
 }

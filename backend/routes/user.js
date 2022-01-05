@@ -4,6 +4,7 @@ const userController = require('../controller/user');
 const expenseController = require('../controller/expense')
 const Payments = require('../controller/payments')
 const authenticatemiddleware = require('../middleware/author');
+const Expense = require('../models/expenses');
 
 const router = express.Router();
 
@@ -16,4 +17,6 @@ router.post('/addexpense', authenticatemiddleware.authenticate, expenseControlle
 router.post("/api/payment/verify", Payments.payment_verification);
 router.get('/create/orderId', Payments.CreateOrder);
 router.get('payment/success/', Payments.Save);
+router.get('/IsPremiumMember', Payments.IsPremiumMember);
+router.get('/leaderboards', expenseController.leaderboards);
 module.exports = router;

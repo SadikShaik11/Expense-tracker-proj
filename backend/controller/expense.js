@@ -1,3 +1,4 @@
+const { json } = require('body-parser');
 const Expense = require('../models/expenses');
 
 const addexpense = (req, res) => {
@@ -19,8 +20,16 @@ const getexpenses = (req, res) => {
         })
 }
 
+const leaderboards = (req,res)=>{
+    Expense.findAll().then((members) => {
+        res.json(members)
+    }).catch((err) => {
+       console.log(error);
+    });
+}
 
 module.exports = {
     getexpenses,
-    addexpense
+    addexpense,
+    leaderboards
 }

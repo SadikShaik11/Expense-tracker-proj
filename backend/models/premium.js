@@ -1,10 +1,13 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../util/database');
 const Transactions = sequelize.define('expenses', {
+    email:{
+      type:Sequelize.STRING
+      ,primaryKey: true
+    },
     transactionid: {
         type: Sequelize.STRING,
         allowNull: false,
-        primaryKey: true
     },
     signature: {
         type: Sequelize.INTEGER,
