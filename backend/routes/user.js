@@ -22,4 +22,5 @@ router.get('/leaderboards', expenseController.leaderboards);
 router.post('/password/forgotpasswrod', userController.forgotpassword)
 router.get('/password/resetpassword',userController.resetpasswrodform);
 router.post('/password/resetpassword',userController.resetpasswrod);
+router.get('/download', expenseController.downloadExpenses)
 module.exports = router;
