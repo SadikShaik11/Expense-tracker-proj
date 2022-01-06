@@ -1,9 +1,8 @@
 const path = require('path');
-
+const Razorpay =require('razorpay')
 const express = require('express');
 var cors = require('cors')
 const sequelize = require('./util/database');
-
 const User = require('./models/users');
 const Expense = require('./models/expenses');
 const Payments = require('./models/premium')

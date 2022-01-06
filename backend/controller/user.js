@@ -2,6 +2,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/users');
+const sendgrid =require('@sendgrid/mail');
+const APIKEY= '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'
+
  const signup = (req, res)=>{
     const { name, email, password } = req.body;
     const saltRounds = 10;
@@ -50,9 +53,23 @@ const login = (req, res) => {
     })
 }
 
+const forgotpassword = (req,res)=>{
+    const{email}=req.body
+    sendgrid.setApiKey(APIKEY);
+
+    const message = {
+        to:"vec.174n1a0565c@gmail.com",
+        from:"sadikshaik139@gmail.com",
+        subject:"Your password",
+        text: 'dummy',
+        html:`<h1>Hello<h1>`
+    }
+
+}
+
 module.exports = {
     signup,
-    login,
-
+     login,
+    forgotpassword
 }
 
